@@ -6,54 +6,25 @@
 <title>SSIS Winter Carnival ❄️🎉</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* General Styles */
+/* --- GENERAL STYLES --- */
 body, html {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  background: url('https://media.istockphoto.com/id/1343120301/vector/blue-snowflake-frame-background.jpg?s=612x612&w=0&k=20&c=5TiSiIcfSxOYU2veospbr8uzi8_EiYDA1askJYD8nqg=') no-repeat center center fixed;
+  background: url('https://media.istockphoto.com/id/1343120301/vector/blue-snowflake-frame-background.jpg?s=612x612&w=0&k=20&c=5TiSiIcfSxOYU2veospbr8uzi8_EiYDA1askJYD8nqg=') repeat fixed;
   background-size: cover;
   color: #fff;
 }
 
-/* Snowflake Animation */
-.snowflake {
-  position: fixed;
-  top: -10px;
-  z-index: 9999;
-  font-size: 1em;
-  color: #fff;
-  user-select: none;
-  pointer-events: none;
-  animation-name: fall;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
+/* --- PARALLAX SCROLLING --- */
+.parallax {
+  background-attachment: fixed;
+  background-size: cover;
 }
 
-@keyframes fall {
-  0% {transform: translateY(0) rotate(0deg);}
-  100% {transform: translateY(110vh) rotate(360deg);}
-}
-
-/* Confetti */
-.confetti {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  background-color: #ff0;
-  z-index: 9999;
-  top: 0;
-  animation: confettiFall 3s linear infinite;
-}
-@keyframes confettiFall {
-  0% {transform: translateY(0) rotate(0deg);}
-  100% {transform: translateY(100vh) rotate(360deg);}
-}
-
-/* Header */
+/* --- HEADER --- */
 header {
   text-align: center;
   padding: 50px 20px;
@@ -61,12 +32,12 @@ header {
 }
 .header-box {
   display: inline-block;
-  background: rgba(255,255,255,0.85);
-  color: #000;
-  padding: 20px 40px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.7);
+  background: rgba(0,0,0,0.5);
+  padding: 25px 50px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(255,255,255,0.5);
   position: relative;
+  animation: sparkle 2s infinite alternate;
 }
 header img.logo {
   position: absolute;
@@ -76,7 +47,13 @@ header img.logo {
   border-radius: 10px;
 }
 
-/* Buttons */
+/* --- SPARKLE ANIMATION --- */
+@keyframes sparkle {
+  0% { box-shadow: 0 0 20px #fff; }
+  100% { box-shadow: 0 0 50px #fffa; }
+}
+
+/* --- NAVIGATION BUTTONS --- */
 nav {
   display: flex;
   justify-content: center;
@@ -88,20 +65,36 @@ nav button {
   color: #fff;
   border: none;
   padding: 15px 25px;
-  border-radius: 12px;
+  border-radius: 15px;
   cursor: pointer;
   font-size: 18px;
   transition: all 0.3s ease;
   box-shadow: 0 0 10px rgba(255,255,255,0.3);
+  position: relative;
+  overflow: hidden;
+}
+nav button::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to right, #fff, #ff0, #fff);
+  opacity: 0.5;
+  transition: 0.5s;
+}
+nav button:hover::after {
+  width: 100%;
 }
 nav button:hover {
   background: rgba(255,255,255,0.8);
   color: #000;
   transform: scale(1.1);
-  box-shadow: 0 0 20px #fff;
+  box-shadow: 0 0 30px #fff;
 }
 
-/* Section Styles */
+/* --- SECTION --- */
 section {
   min-height: 100vh;
   padding: 60px 20px;
@@ -124,9 +117,11 @@ section.visible {
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(255,255,255,0.5);
   max-width: 800px;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Activities Images */
+/* --- ACTIVITIES GRID --- */
 .activities-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
@@ -136,24 +131,40 @@ section.visible {
 .activities-grid img {
   width: 100%;
   border-radius: 15px;
-  transition: transform 0.3s;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 .activities-grid img:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 20px #fff;
+  box-shadow: 0 0 30px #fffa;
 }
 
-/* Footer */
-footer {
+/* --- POPUP INFO CARD --- */
+.popup {
   position: fixed;
-  bottom: 10px;
-  left: 10px;
-  font-size: 14px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%) scale(0);
+  background: rgba(0,0,0,0.9);
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 500px;
   color: #fff;
-  z-index: 10000;
+  z-index: 10001;
+  transition: transform 0.3s ease;
+}
+.popup.show {
+  transform: translate(-50%,-50%) scale(1);
+}
+.popup button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
-/* Gallery */
+/* --- GALLERY GRID --- */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
@@ -163,14 +174,24 @@ footer {
 .gallery-grid img {
   width: 100%;
   border-radius: 15px;
-  transition: transform 0.3s;
+  transition: all 0.3s;
 }
 .gallery-grid img:hover {
   transform: scale(1.1);
   box-shadow: 0 0 20px #fffa;
 }
 
-/* Music Toggle */
+/* --- FOOTER --- */
+footer {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  font-size: 14px;
+  color: #fff;
+  z-index: 10000;
+}
+
+/* --- MUSIC BUTTON --- */
 .music-btn {
   position: fixed;
   bottom: 10px;
@@ -188,6 +209,37 @@ footer {
   background: rgba(255,255,255,0.8);
   color: #000;
 }
+
+/* --- SNOWFLAKES & CONFETTI --- */
+.snowflake {
+  position: fixed;
+  top: -10px;
+  font-size: 10px;
+  color: #fff;
+  user-select: none;
+  pointer-events: none;
+  animation-name: fall;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  z-index: 9999;
+}
+@keyframes fall {
+  0% {transform: translateY(0) rotate(0deg);}
+  100% {transform: translateY(110vh) rotate(360deg);}
+}
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  z-index: 9999;
+  top: 0;
+  animation: confettiFall 3s linear infinite;
+}
+@keyframes confettiFall {
+  0% {transform: translateY(0) rotate(0deg);}
+  100% {transform: translateY(100vh) rotate(360deg);}
+}
 </style>
 </head>
 <body>
@@ -201,9 +253,7 @@ footer {
     <h1>🎉❄️ SSIS Winter Carnival ❄️🎉</h1>
     <p>Welcome to the fun & festive carnival! 🌟🎪</p>
   </div>
-  <a href="https://www.facebook.com/ShiningStarInternationalSchool/" target="_blank">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB2x8M12VubC32t0sSnn4xS9bko2d-31-42A&sdata=image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAMAAABC4vDmAAABX1BMVEX////+zgoAAAD/0Qr/1AtGAABEAABQAABKAABaEQBOAABSAABfGwBUAAA1AAD/1ws+AABdFwBYAAD6+fj18/IaAAA5AAAtAAApAADw7OoRAAAfAAC8uLQWAAD/2wtPEwBYGgDm4N6PkJDOxsNFFQDf2NRICwClkYz0yQpRGQB8WAXftQrnvQpVEwBcIABjIgCyn5vCr6ibhYGCW1VwPTJtSkNcVE55cGw+Mi8oCgCJhYMsEgBkXFo1FACrpKEvDQBJKgNcQQQ7EAA6GRSnhAfOqgldS0n/1TaJZAX+7LL/+er/5n9QLSZZMwL/56JLIQCQdm9SIhq8lwh+ZV9wRwH/9dmidwZAABhhKB6kfkZ5VlyfhG9gOCt2QAO2iQCRZR6OYTyujF+RfImTeAZhLQCcaQC+rrSWcFGbjG6vmk/Pz9d5Sxm3opHAmzS6nnyIVgRgJix4UTUpJCEmFxFQOzFjwVTdAAAKdUlEQVR4nO1b/VfixhoO+SKBAAmJQCQLxGFIWEDyuVjrsq0K2tbtjcRycYtuu8X21vvhbfX/P3cCroLr9rjnatgf8pwDxJk3yZN33nk/JiOGRYgQIUKECBEiRIgQIUKECBEiRIjwiXihLpvBh1DwzrIpfAB54wscLpvEXWw++7K4JS2bxSIg/vLly5XusmksQNrKv/rq1aviZ6WqbmG72Px6O725bCJzkHe287ulXnE7DZZN5RZWevtrPVZ6nk73l03lBiBXLTTI2F7jq2r6s7F1t5bbL8W++fa73XT1QF42mxm6fPV1k4h9j32X+Vs15y2bzhTyYTk9IGOxvb09YsBX+c/Cr/t07SgTm2KP3K/VfHHZjJCVU/Vqj5hS+u6HvWa6zpvLpoTJ4zI9vFbUt9gPe7tU/XDptq5R9XV9xin2/Tffx/TXdcZaMidYrpdngzeFHiN7fJ1asq175dZz8oYT0WsQ5PNa2V4qJ5Ou1PRbRRGnuyTRWK8klmfrEjCcSmJ4q6gYuXtUimWGTH1sgLCtXYLAtNwKRTOV1pEemyO1/3fk2slJvZKg+YrjmQCGwk1VLN8dxePxFkI5QfXIeVLHb5BvJwcMkygjJBjm0PUtEz6VOxVlCAxvTOfoBGKDbrd+sj8cNPQbTpkSovOjto8sjNQbg+H+0TpDM4gaw6fTY99QoPq43EDXs91DhgruUauVyyfDQa+pxwhyzhmcvh0QmXfK62A4CYIkCb2JqL2u16agc/zhQb+jgccjBrbpcr3O0LXJxdlur0mWMiRBxOaR+ekcU3/W30G8edOBqGVKmWZvd/j8Nc3z1Wo196ilBTgo12vDXkPXiQy5SGdmTKfnSEo61lR8QC52IWakrjd6u/XqY6eA8KBcPmqSH9K5xvFUSpbg6i+Z+/pJ4nmtmlMelRNidVgurzfvUdJMHW+vxUDx69J9/fpzuk4/fqoMD1utycd0RZ5d+yMz/9U9IoR+RNXpx9bTe1brH2FF6P5MyEi/vFdPtTrzFJwQK4dtTRr3s8qcalMZj/9SvzvGSE+1OvVUFaE6YiuV++2KaP4YSMhu9bJxR4BsHrUqraerUqEjCO17dZX5aWpUsFwt9hZJkfpJq/JkegogOywXv8euyLPZMp5GIVIL3WQDceKetppXEav1xl1XlDn9ddbdqt8hReqTVoV56kw00BV7ZwSJnjHrVBhEat6myMZEEEZPv+ox1VVvXleEjow8MCnJrdS3/5ybCWRzwgqJMDJ2EbFKLYzRb5L64xkiZqbW61drt6Rmegqnigh01b7VFTlU1eNmaR/DKtw63VXm9SQIydAqG5flEu9nfub0XH2bCfyUkWqnbOwf72Mf0eAE1glvcV22Ofa6YCB7hnyM8r2eIjkcN1LF398PbGY3xa2HueDvsezpdPyIpnX+Fums9JtoZdtxgJ3f+E6ylxRCLQB9gZ0lc8Q/3wyIgJsmptpZDxl782ZSNlKcEyInCQ3f1B0RjR5JTo0dKU9wJQz75XZaNrl2MkRSssuxs5lPzDg0/6UKXOCQfp1znfqEY0IsSeGIq8y7T/LfyE2wqFaXj+ea9QshHuISNmC5yXzWS2hmig0WO42FvGVfSIW4qGBm2Ys5lZCnYMSeIFLnpwvBeMiyIS5VGVl2OD9O//GTF813mHq8EKgzp6zgh0fKY5Nz5R05eJe8KA3OpeP5xY7AUbFhOipbiM/ll+Qf/73Qid/ln+9UzUSD5dzwpl+bE24tmhwwF2SmoThnDWIxz9JbXEg5AoKY5SbN21tPzkj99I+RwLZPevp8UV/iODY0nyAz3MmN+ZSGw+aQSwlCCn2Sk9Nm6YZW6YTLhkYKxoWL93aT6V1ctFGG3HKA6QjooD1svLetzBmbNcIiZaaEs1mQKTVPUcLLIc8Z2I4I7GSWY1NnAzIz81+pbGiOSsuygZckicZZoKSso72fY6LqOVlBYE8GOlIX0YuH5xNQNjXIZIjBRZzlsoxtLqzOyYYTF7hke9jMkCh5WQ+Jk2gLbE+fjlt2ZH0450XFZpEChYtGc8JlQ3qnhRIX7qyd4oT4yPhIugu8eGBcF5N2WMmL6nBtpKSK/VfTXdYcpMl2O6zkBXJtLpW6Z9wWIZtOQmiHlbyABOuaDzIV4FXiIfkEwwYP3j4CrZB8wqfNp8/gjXLY+KRHDkc/omZ7FsBML5ji4uwHWzxcFNaePpMS7YRrjVwjwQRTHNo3Pkp177grKVgsYhytNRJV52m3c8hxwYWqho2SpoEyAuAZ6AO0m0NoeSpymL7mWUFZ2HJVaBjlxNhToedrU31qj57FSG6yQiHvPC47I2ZdrVE+4JnxmLIhRVsgTY3G1BuRz6njHAyEqXJ6DIBL+QpcUfy8BQp0ulB77IgjApepl8fSmDdNvoX5lI+5fFehRpLFW5KbU0DalfM5qX8lBy+X+7lqbVvq5DUMU7puehO7SmvWo79yAAeS7NYO5MMCgHke66R9rF9QwHZVsvKWtFUEarEv+VcdK9CGciWq/XxB7jzrSAq+1VnZxDZWn2BjlZy+6uwULbjyTOuuroCN4g7YWd1Eh8rG6g74Al/r4sUuvtHZ2kJmD//c2LrEN7FNfPVFB+/38csujm88wfqZ2l1bUzCAvhT0QX8Eh2D6s3bdCi5fbG3gW0gYBo3oSdbWIBZ0K0HDcnbxqnhH6b/6jLYKTgENq/tUOZ0oSZ8SJcSPCF+3o4uJfyX6sdMXIXmjtn3zwNJfRgsoYaZ778qKqtnTN4Cmk7X9WaYjG/YH/lMyPO9BeZCRTRlBuAieATi2GOgOm35J0webXkSSgpR3BKTZnaRZ4+y5RaRpkE0FMUZJsqYRN6YC6iiu3Z4c/IiYnMraDyIFWQZFFNe0bWgkBCELge94kunZBqqCPc9AEU22HEeTnCQn2MByUQB2HAuDs3Mw03Z8FbNTQc7ppTgPABVDAlrQZDkGJgXSYpCWImEjZT9o/GCChiadsMeMj9lxW4aUbdKWxVRGtOEkRl6SgpqvJuJQZSqmjOoW0UIdjGXSKdtJeKoLLNrD7ERACrZYlnVkjbI8HnhZx2YTshVHl7Eg4xjJkWomHraxENI5iOIYNHIu5tM2pvFj27Ug7QJTNHgf42kga1a5jITKAGXsLXXEoKdw5RylGkjetMYJRIoKSJnAT6zHfZuGsiHajAHLcVhpoRFw/YQtjWlgUg8jBdIFRcoXoJEfYz4Kad0iivkqSB+owS5hH8vnQCcP6rwiFWpdVeFp1c1poOCr+ZxqpF2Qtqwc0jEfGPrYkgHPaz41VhXsDd+Fh5Q6pjQl51s0I7s0RE/5EFJiB8f7Go5r6FdF8QGHffSlbOH4C0y8xDcUHO/08Rd5vCNd4fgWau8qePFyJ5Dtbq1+qa1uXD3bVnZWrtTgPx8uD571RVhYwa9AYaXfXcHNbjG9fajKh88OCl1xp5B/UDaoKooqK4oMFYDMUUFTCijytBUNrQIldCAqUFbQPFQAakG1jRqIonNEOG2RgIrOme4AkoES3FQCQERNwcnBpYIdVRIILgiUh5dGESJEiBAhQoQIESJEiBAhQoQIEf4v/A9zPIoENH+1DwAAAABJRU5ErkJggg==" class="logo">
-  </a>
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB2x8M12VubC32t0sSnn4xS9bko2d-31-42A&sdata=image/png;base64" class="logo">
 </header>
 
 <!-- Navigation -->
@@ -215,32 +265,32 @@ footer {
 </nav>
 
 <!-- Activities Section -->
-<section id="activities">
+<section id="activities" class="parallax">
   <div class="blur-box">
     <h2>🎪 Activities</h2>
     <div class="activities-grid">
       <div>
-        <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Science Exhibition">
+        <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Science Exhibition" onclick="showPopup('Science Exhibition at Quadrangle')">
         <p>Science Exhibition - Quadrangle</p>
       </div>
       <div>
-        <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="Games">
+        <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="Games" onclick="showPopup('Games and Fun Activities at Quadrangle')">
         <p>Games - Quadrangle</p>
       </div>
       <div>
-        <img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" alt="Food & Drinks">
-        <p>Food/Drinks - Canteen Near Quadrangle</p>
+        <img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" alt="Food & Drinks" onclick="showPopup('Food & Drinks at Canteen Near Quadrangle')">
+        <p>Food/Drinks - Canteen</p>
       </div>
       <div>
-        <img src="https://cdn-icons-png.flaticon.com/512/848/848043.png" alt="Dance & Music">
-        <p>Programs Like Dance & Music - Auditorium</p>
+        <img src="https://cdn-icons-png.flaticon.com/512/848/848043.png" alt="Dance & Music" onclick="showPopup('Programs Like Dance & Music at Auditorium')">
+        <p>Dance & Music - Auditorium</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Location Section -->
-<section id="location">
+<section id="location" class="parallax">
   <div class="blur-box">
     <h2>📍 Location</h2>
     <p>United Arab Emirates, Abu Dhabi, Mussafah Shabiya 12</p>
@@ -249,15 +299,15 @@ footer {
 </section>
 
 <!-- Information Section -->
-<section id="info">
+<section id="info" class="parallax">
   <div class="blur-box">
     <h2>ℹ️ About Our School</h2>
-    <p>Shining Star International School is rated Good by ADEK and provides excellent education with a variety of activities. It has a strong focus on academics, arts, and co-curricular activities, making it a great place for students to thrive! 🌟</p>
+    <p>Shining Star International School is rated Good by ADEK, providing excellent education with a variety of activities. It focuses on academics, arts, and co-curricular activities, helping students thrive! 🌟</p>
   </div>
 </section>
 
 <!-- Gallery Section -->
-<section id="gallery">
+<section id="gallery" class="parallax">
   <div class="blur-box">
     <h2>📸 Gallery</h2>
     <div class="gallery-grid">
@@ -268,6 +318,12 @@ footer {
     </div>
   </div>
 </section>
+
+<!-- Popup -->
+<div id="popup" class="popup">
+  <p id="popup-text"></p>
+  <button onclick="closePopup()">Close</button>
+</div>
 
 <!-- Footer -->
 <footer>-Created By Aadi Sreehari 7B</footer>
@@ -298,15 +354,14 @@ function toggleMusic() {
 }
 
 // Snowflakes
-const snowContainer = document.getElementById('snowflakes');
 for(let i=0;i<50;i++){
   const snow = document.createElement('div');
   snow.classList.add('snowflake');
-  snow.style.left = Math.random() * window.innerWidth + 'px';
-  snow.style.animationDuration = 5 + Math.random()*5 + 's';
-  snow.style.fontSize = 10 + Math.random()*20 + 'px';
+  snow.style.left = Math.random()*window.innerWidth+'px';
+  snow.style.fontSize = 10+Math.random()*20+'px';
+  snow.style.animationDuration = 5+Math.random()*5+'s';
   snow.textContent = '❄';
-  snowContainer.appendChild(snow);
+  document.body.appendChild(snow);
 }
 
 // Confetti
@@ -318,7 +373,15 @@ for(let i=0;i<30;i++){
   conf.style.animationDelay = Math.random()*3+'s';
   document.body.appendChild(conf);
 }
-</script>
 
+// Popup Functions
+function showPopup(text){
+  document.getElementById('popup-text').innerText = text;
+  document.getElementById('popup').classList.add('show');
+}
+function closePopup(){
+  document.getElementById('popup').classList.remove('show');
+}
+</script>
 </body>
 </html>
