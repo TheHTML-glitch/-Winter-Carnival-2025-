@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SSIS Winter Carnival ❄️🎪✨</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(#d9ecff, #ffffff);
+        background-attachment: fixed;
+    }
+
+    .header-box {
+        width: 80%;
+        margin: 20px auto;
+        background: white;
+        padding: 25px 40px;
+        border-radius: 18px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+        position: relative;
+        text-align: center;
+    }
+
+    .header-box img {
+        width: 90px;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        border-radius: 10px;
+    }
+
+    h1 {
+        font-size: 42px;
+        margin: 0;
+    }
+
+    .nav {
+        width: 80%;
+        margin: 20px auto;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .nav button {
+        background: #ffffff;
+        border: 2px solid #1d75d8;
+        padding: 12px 20px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 17px;
+        transition: 0.2s;
+    }
+
+    .nav button:hover {
+        background: #1d75d8;
+        color: white;
+        transform: scale(1.05);
+    }
+
+    section {
+        width: 80%;
+        margin: 20px auto 60px;
+        background: white;
+        padding: 30px;
+        border-radius: 18px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+        display: none;
+    }
+
+    h2 {
+        font-size: 32px;
+        margin-top: 0;
+    }
+
+    ul {
+        font-size: 20px;
+        line-height: 1.8;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header-box">
+    <h1>❄️ SSIS Winter Carnival 🎪</h1>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB2x8M12VubC32t0sSnn4xS9bko2d-31-42A&s" alt="SSIS Logo">
+</div>
+
+<!-- NAVIGATION -->
+<div class="nav">
+    <button onclick="show('activities')">🎉 Activities</button>
+    <button onclick="show('location')">📍 Location</button>
+    <button onclick="show('info')">ℹ️ Information</button>
+</div>
+
+<!-- ACTIVITIES -->
+<section id="activities">
+    <h2>🎭 Fun Activities</h2>
+    <ul>
+        <li>🔬 Science Exhibition — Quadrangle</li>
+        <li>🎮 Games — Quadrangle</li>
+        <li>🍕 Food & Drinks — Canteen near the Quadrangle</li>
+        <li>💃 Dance & Music Programs — Auditorium</li>
+    </ul>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+    <h2>📍 Event Location</h2>
+    <p style="font-size: 20px;">
+        United Arab Emirates, Abu Dhabi, Mussafah Shabiya 12<br>
+        <strong>Shining Star International School</strong>
+    </p>
+</section>
+
+<!-- INFORMATION -->
+<section id="info">
+    <h2>🏫 About SSIS</h2>
+    <p style="font-size: 20px;">
+        Shining Star International School (SSIS) is a well-known CBSE school in Abu Dhabi,  
+        recognized by ADEK with a **Good** rating.  
+        The school focuses on strong academics, creativity, student safety,  
+        community values, and modern learning facilities.  
+        SSIS builds a bright path for students with fun, innovation, and dedication.  
+    </p>
+</section>
+
+<script>
+function show(id) {
+    document.querySelectorAll("section").forEach(sec => sec.style.display = "none");
+    document.getElementById(id).style.display = "block";
+    window.scrollTo({ top: document.getElementById(id).offsetTop - 20, behavior: "smooth" });
+}
+</script>
+
+</body>
+</html>
