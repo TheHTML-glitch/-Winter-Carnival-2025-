@@ -1,387 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SSIS Winter Carnival ❄️🎉</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<style>
-/* --- GENERAL STYLES --- */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto', sans-serif;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  background: url('https://media.istockphoto.com/id/1343120301/vector/blue-snowflake-frame-background.jpg?s=612x612&w=0&k=20&c=5TiSiIcfSxOYU2veospbr8uzi8_EiYDA1askJYD8nqg=') repeat fixed;
-  background-size: cover;
-  color: #fff;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎉❄️ SSIS Winter Carnival ❄️🎉</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* --- GENERAL STYLES --- */
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Montserrat', sans-serif; }
+    body {
+      background: url('https://media.istockphoto.com/id/1343120301/vector/blue-snowflake-frame-background.jpg?s=612x612&w=0&k=20&c=5TiSiIcfSxOYU2veospbr8uzi8_EiYDA1askJYD8nqg=') no-repeat center center fixed;
+      background-size: cover;
+      overflow-x: hidden;
+      color: #fff;
+    }
+    header { position: relative; text-align: center; padding: 50px 20px; z-index: 2; }
+    .header-box {
+      display: inline-block;
+      background: rgba(255,255,255,0.9);
+      color: #000;
+      padding: 20px 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #fff;
+      animation: sparkle 2s infinite alternate;
+    }
+    .header-box h1 { font-size: 2.5rem; }
+    .logo { position: absolute; top: 20px; right: 20px; width: 80px; }
+    .creator-text { position: absolute; top: 10px; right: 120px; font-size: 14px; color: #fff; z-index:1000; }
 
-/* --- PARALLAX SCROLLING --- */
-.parallax {
-  background-attachment: fixed;
-  background-size: cover;
-}
+    /* --- BUTTONS --- */
+    nav { display:flex; justify-content:center; gap:20px; margin:30px 0; flex-wrap: wrap; }
+    .nav-btn {
+      background: rgba(255,255,255,0.8); color:#000; border:none; padding:15px 30px; border-radius:15px;
+      font-weight:bold; cursor:pointer; font-size:1rem; box-shadow:0 0 15px #fff; transition: all 0.3s;
+    }
+    .nav-btn:hover { transform: scale(1.1); box-shadow:0 0 25px #fffa; }
 
-/* --- HEADER --- */
-header {
-  text-align: center;
-  padding: 50px 20px;
-  position: relative;
-}
-.header-box {
-  display: inline-block;
-  background: rgba(0,0,0,0.5);
-  padding: 25px 50px;
-  border-radius: 20px;
-  box-shadow: 0 0 30px rgba(255,255,255,0.5);
-  position: relative;
-  animation: sparkle 2s infinite alternate;
-}
-header img.logo {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 80px;
-  border-radius: 10px;
-}
+    /* --- SECTIONS --- */
+    section {
+      min-height: 80vh;
+      padding:50px 20px;
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+      justify-content:center;
+      opacity:0;
+      transform: translateY(50px);
+      transition: all 1s;
+    }
+    section.active { opacity:1; transform: translateY(0); }
 
-/* --- SPARKLE ANIMATION --- */
-@keyframes sparkle {
-  0% { box-shadow: 0 0 20px #fff; }
-  100% { box-shadow: 0 0 50px #fffa; }
-}
+    .section-box {
+      background: rgba(0,0,0,0.6);
+      padding: 20px 30px;
+      border-radius:20px;
+      text-align:center;
+      max-width:800px;
+      box-shadow:0 0 20px #fff;
+    }
 
-/* --- NAVIGATION BUTTONS --- */
-nav {
-  display: flex;
-  justify-content: center;
-  margin: 30px 0;
-  gap: 20px;
-}
-nav button {
-  background: rgba(255,255,255,0.2);
-  color: #fff;
-  border: none;
-  padding: 15px 25px;
-  border-radius: 15px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px rgba(255,255,255,0.3);
-  position: relative;
-  overflow: hidden;
-}
-nav button::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: linear-gradient(to right, #fff, #ff0, #fff);
-  opacity: 0.5;
-  transition: 0.5s;
-}
-nav button:hover::after {
-  width: 100%;
-}
-nav button:hover {
-  background: rgba(255,255,255,0.8);
-  color: #000;
-  transform: scale(1.1);
-  box-shadow: 0 0 30px #fff;
-}
+    /* --- ACTIVITIES GRID --- */
+    .activities-grid, .gallery-grid { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; margin-top:20px; }
+    .activities-grid div, .gallery-grid div {
+      background: rgba(255,255,255,0.1);
+      padding:10px;
+      border-radius:15px;
+      transition: all 0.3s;
+      text-align:center;
+      cursor:pointer;
+    }
+    .activities-grid div:hover, .gallery-grid div:hover { transform: scale(1.05); box-shadow:0 0 20px #fff; }
+    .activities-grid img, .gallery-grid img { width:150px; height:auto; border-radius:12px; }
 
-/* --- SECTION --- */
-section {
-  min-height: 100vh;
-  padding: 60px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 1s ease;
-}
-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.blur-box {
-  background: rgba(0,0,0,0.5);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.5);
-  max-width: 800px;
-  position: relative;
-  overflow: hidden;
-}
+    /* --- SPARKLES ANIMATION --- */
+    @keyframes sparkle {
+      0% { box-shadow:0 0 5px #fff; }
+      50% { box-shadow:0 0 20px #fffa; }
+      100% { box-shadow:0 0 5px #fff; }
+    }
 
-/* --- ACTIVITIES GRID --- */
-.activities-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
-.activities-grid img {
-  width: 100%;
-  border-radius: 15px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.activities-grid img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px #fffa;
-}
+    /* --- CONFETTI --- */
+    #confetti-canvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
 
-/* --- POPUP INFO CARD --- */
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%) scale(0);
-  background: rgba(0,0,0,0.9);
-  padding: 30px;
-  border-radius: 20px;
-  max-width: 500px;
-  color: #fff;
-  z-index: 10001;
-  transition: transform 0.3s ease;
-}
-.popup.show {
-  transform: translate(-50%,-50%) scale(1);
-}
-.popup button {
-  margin-top: 15px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
+    /* --- MUSIC BUTTON --- */
+    .music-btn { position:fixed; top:10px; left:20px; padding:10px 20px; background:#fff; color:#000; border:none; border-radius:10px; cursor:pointer; z-index:1000; }
 
-/* --- GALLERY GRID --- */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-  gap: 15px;
-  margin-top: 20px;
-}
-.gallery-grid img {
-  width: 100%;
-  border-radius: 15px;
-  transition: all 0.3s;
-}
-.gallery-grid img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px #fffa;
-}
-
-/* --- FOOTER --- */
-footer {
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  font-size: 14px;
-  color: #fff;
-  z-index: 10000;
-}
-
-/* --- MUSIC BUTTON --- */
-.music-btn {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  background: rgba(255,255,255,0.3);
-  color: #fff;
-  font-weight: bold;
-  transition: all 0.3s;
-}
-.music-btn:hover {
-  background: rgba(255,255,255,0.8);
-  color: #000;
-}
-
-/* --- SNOWFLAKES & CONFETTI --- */
-.snowflake {
-  position: fixed;
-  top: -10px;
-  font-size: 10px;
-  color: #fff;
-  user-select: none;
-  pointer-events: none;
-  animation-name: fall;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  z-index: 9999;
-}
-@keyframes fall {
-  0% {transform: translateY(0) rotate(0deg);}
-  100% {transform: translateY(110vh) rotate(360deg);}
-}
-.confetti {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  z-index: 9999;
-  top: 0;
-  animation: confettiFall 3s linear infinite;
-}
-@keyframes confettiFall {
-  0% {transform: translateY(0) rotate(0deg);}
-  100% {transform: translateY(100vh) rotate(360deg);}
-}
-</style>
+  </style>
 </head>
 <body>
 
-<!-- Snowflakes -->
-<div id="snowflakes"></div>
+<canvas id="confetti-canvas"></canvas>
 
-<!-- Header -->
+<button class="music-btn" onclick="toggleMusic()">🔊 Play/Pause Music</button>
+<audio id="bg-music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-happyrock.mp3" type="audio/mpeg">
+</audio>
+
 <header>
   <div class="header-box">
     <h1>🎉❄️ SSIS Winter Carnival ❄️🎉</h1>
     <p>Welcome to the fun & festive carnival! 🌟🎪</p>
   </div>
   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB2x8M12VubC32t0sSnn4xS9bko2d-31-42A&sdata=image/png;base64" class="logo">
+  <div class="creator-text">-Created By Aadi Sreehari 7B</div>
 </header>
 
-<!-- Navigation -->
 <nav>
-  <button onclick="document.getElementById('activities').scrollIntoView()">Activities</button>
-  <button onclick="document.getElementById('location').scrollIntoView()">Location</button>
-  <button onclick="document.getElementById('info').scrollIntoView()">Information</button>
-  <button onclick="document.getElementById('gallery').scrollIntoView()">Gallery</button>
+  <button class="nav-btn" onclick="showSection('activities')">Activities</button>
+  <button class="nav-btn" onclick="showSection('location')">Location</button>
+  <button class="nav-btn" onclick="showSection('information')">Information</button>
+  <button class="nav-btn" onclick="showSection('gallery')">Gallery</button>
 </nav>
 
-<!-- Activities Section -->
-<section id="activities" class="parallax">
-  <div class="blur-box">
-    <h2>🎪 Activities</h2>
+<!-- ACTIVITIES SECTION -->
+<section id="activities">
+  <div class="section-box">
+    <h2>🎪 Activities & Locations</h2>
     <div class="activities-grid">
-      <div>
-        <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Science Exhibition" onclick="showPopup('Science Exhibition at Quadrangle')">
-        <p>Science Exhibition - Quadrangle</p>
-      </div>
-      <div>
-        <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="Games" onclick="showPopup('Games and Fun Activities at Quadrangle')">
-        <p>Games - Quadrangle</p>
-      </div>
-      <div>
-        <img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" alt="Food & Drinks" onclick="showPopup('Food & Drinks at Canteen Near Quadrangle')">
-        <p>Food/Drinks - Canteen</p>
-      </div>
-      <div>
-        <img src="https://cdn-icons-png.flaticon.com/512/848/848043.png" alt="Dance & Music" onclick="showPopup('Programs Like Dance & Music at Auditorium')">
-        <p>Dance & Music - Auditorium</p>
-      </div>
+      <div><img src="https://cdn-icons-png.flaticon.com/512/196/196566.png" alt="Science"><p>Science Exhibition<br>Quadrangle</p></div>
+      <div><img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Games"><p>Games<br>Quadrangle</p></div>
+      <div><img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Food"><p>Food & Drinks<br>Canteen Near Quadrangle</p></div>
+      <div><img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Programs"><p>Dance & Music Programs<br>Auditorium</p></div>
     </div>
   </div>
 </section>
 
-<!-- Location Section -->
-<section id="location" class="parallax">
-  <div class="blur-box">
+<!-- LOCATION SECTION -->
+<section id="location">
+  <div class="section-box">
     <h2>📍 Location</h2>
-    <p>United Arab Emirates, Abu Dhabi, Mussafah Shabiya 12</p>
-    <p>Shining Star International School</p>
+    <p>United Arab Emirates, Abu Dhabi, Mussafah Shabiya 12<br>Shining Star International School</p>
   </div>
 </section>
 
-<!-- Information Section -->
-<section id="info" class="parallax">
-  <div class="blur-box">
-    <h2>ℹ️ About Our School</h2>
-    <p>Shining Star International School is rated Good by ADEK, providing excellent education with a variety of activities. It focuses on academics, arts, and co-curricular activities, helping students thrive! 🌟</p>
+<!-- INFORMATION SECTION -->
+<section id="information">
+  <div class="section-box">
+    <h2>ℹ️ About Shining Star International School</h2>
+    <p>Shining Star International School is rated Good by ADEK. It provides a great learning environment, offering both academic excellence and fun activities. Students enjoy a safe and supportive atmosphere with multiple extracurricular options. 🌟</p>
   </div>
 </section>
 
-<!-- Gallery Section -->
-<section id="gallery" class="parallax">
-  <div class="blur-box">
+<!-- GALLERY SECTION -->
+<section id="gallery">
+  <div class="section-box">
     <h2>📸 Gallery</h2>
     <div class="gallery-grid">
-      <img src="https://cdn-icons-png.flaticon.com/512/3213/3213467.png" alt="Gallery Image">
-      <img src="https://cdn-icons-png.flaticon.com/512/3213/3213431.png" alt="Gallery Image">
-      <img src="https://cdn-icons-png.flaticon.com/512/3213/3213435.png" alt="Gallery Image">
-      <img src="https://cdn-icons-png.flaticon.com/512/3213/3213440.png" alt="Gallery Image">
+      <div><img src="https://cdn-icons-png.flaticon.com/512/2921/2921822.png" alt="Gallery1"></div>
+      <div><img src="https://cdn-icons-png.flaticon.com/512/2921/2921825.png" alt="Gallery2"></div>
+      <div><img src="https://cdn-icons-png.flaticon.com/512/2921/2921826.png" alt="Gallery3"></div>
     </div>
   </div>
 </section>
 
-<!-- Popup -->
-<div id="popup" class="popup">
-  <p id="popup-text"></p>
-  <button onclick="closePopup()">Close</button>
-</div>
-
-<!-- Footer -->
-<footer>-Created By Aadi Sreehari 7B</footer>
-
-<!-- Music Button -->
-<button class="music-btn" onclick="toggleMusic()">🎵 Music</button>
-<audio id="bg-music" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-// Scroll Animation
-const sections = document.querySelectorAll('section');
-window.addEventListener('scroll', () => {
-  sections.forEach(section => {
-    const top = section.getBoundingClientRect().top;
-    if(top < window.innerHeight - 100){
-      section.classList.add('visible');
-    }
-  });
-});
+  // --- SECTION SLIDE-IN ---
+  const sections = document.querySelectorAll('section');
+  function showSection(id){
+    sections.forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
 
-// Music Toggle
-function toggleMusic() {
-  const music = document.getElementById('bg-music');
-  if(music.paused) music.play();
-  else music.pause();
-}
+  // --- BACKGROUND MUSIC ---
+  const bgMusic = document.getElementById('bg-music');
+  function toggleMusic(){
+    if(bgMusic.paused){ bgMusic.play(); } else { bgMusic.pause(); }
+  }
 
-// Snowflakes
-for(let i=0;i<50;i++){
-  const snow = document.createElement('div');
-  snow.classList.add('snowflake');
-  snow.style.left = Math.random()*window.innerWidth+'px';
-  snow.style.fontSize = 10+Math.random()*20+'px';
-  snow.style.animationDuration = 5+Math.random()*5+'s';
-  snow.textContent = '❄';
-  document.body.appendChild(snow);
-}
+  // --- CONFETTI ---
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
 
-// Confetti
-for(let i=0;i<30;i++){
-  const conf = document.createElement('div');
-  conf.classList.add('confetti');
-  conf.style.left = Math.random()*window.innerWidth+'px';
-  conf.style.backgroundColor = `hsl(${Math.random()*360},100%,50%)`;
-  conf.style.animationDelay = Math.random()*3+'s';
-  document.body.appendChild(conf);
-}
+  const confettiCount = 150;
+  const confetti = [];
+  for(let i=0;i<confettiCount;i++){
+    confetti.push({
+      x: Math.random()*canvas.width,
+      y: Math.random()*canvas.height,
+      r: Math.random()*6+2,
+      d: Math.random()*confettiCount,
+      color: `hsl(${Math.random()*360},100%,50%)`,
+      tilt: Math.floor(Math.random()*10)-10
+    });
+  }
 
-// Popup Functions
-function showPopup(text){
-  document.getElementById('popup-text').innerText = text;
-  document.getElementById('popup').classList.add('show');
-}
-function closePopup(){
-  document.getElementById('popup').classList.remove('show');
-}
+  function drawConfetti(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    confetti.forEach(c=>{
+      ctx.beginPath();
+      ctx.lineWidth = c.r;
+      ctx.strokeStyle = c.color;
+      ctx.moveTo(c.x+c.tilt, c.y);
+      ctx.lineTo(c.x+c.tilt+ c.r/2, c.y+c.r);
+      ctx.stroke();
+    });
+    updateConfetti();
+  }
+
+  let angle = 0;
+  function updateConfetti(){
+    angle += 0.01;
+    confetti.forEach(c=>{
+      c.y += Math.cos(angle+c.d) + 1 + c.r/2;
+      c.x += Math.sin(angle) * 2;
+      if(c.y > canvas.height){ c.y = -10; c.x = Math.random()*canvas.width; }
+    });
+  }
+  setInterval(drawConfetti,20);
 </script>
+
 </body>
 </html>
